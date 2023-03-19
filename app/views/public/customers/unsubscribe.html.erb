@@ -1,0 +1,4 @@
+<h1>本当に退会致しますか？</h1>
+
+<%= button_to '退会致しません', end_users_path, method: :get %>
+<%= button_to '退会致します', end_user_path(current_end_user), method: :delete, confirm: "本当に宜しいのですね？" %>

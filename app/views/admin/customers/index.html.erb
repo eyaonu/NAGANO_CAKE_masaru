@@ -1,0 +1,7 @@
+<% @customers.each do |customer| %>
+    <%= customer.first_name %> <%= customer.last_name %>
+    <% if customer.deleted_at %>
+      削除済み
+    <% end %>
+    <br>
+<% end %>
