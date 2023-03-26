@@ -1,11 +1,11 @@
-class Admin::OrderesController < ApplicationController
+class Admin::OrdersController < ApplicationController
   def update
     order = Order.find(params[:id])
     #注文ステータスが"入金確認"になったら製作ステータスを"製作待ち"
     if params[:order][:status] == "b"
-      order.ordered_items.each do |ordered_item|
-        ordered_item.production_status = "b"
-        ordered_item.update(production_status: ordered_item.production_status)
+      order.order_items.each do |order_item|
+        order_item.production_status = "b"
+        order_item.update(production_status: order_item.production_status)
       end
     end
     order.update(order_params)
@@ -18,11 +18,11 @@ class Admin::OrderesController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @ordered_item = @order.ordered_items
+    @order_item = @order.order_items
     #商品合計
     @total = 0
-    @ordered_item.each do |ordered_item|
-      tol = ordered_item.item.non_taxed_price * ordered_item.quantity
+    @order_item.each do |order_item|
+      tol = order_item.item.non_taxed_price * order_item.quantity
       @total += tol 
     end
   end
@@ -32,5 +32,4 @@ class Admin::OrderesController < ApplicationController
   def order_params
     params.require(:order).permit(:status)
   end
-  
 end

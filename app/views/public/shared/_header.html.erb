@@ -1,0 +1,28 @@
+<!--<% if current_customer %>
+  <div style="color:white">ようこそ<%= current_customer.last_name %>さん</div>
+<% end %>-->
+
+<ul class="navbar-nav nav justify-content-end mr-sm-2">
+
+<li class="nav-item">
+  <%= link_to "マイページ", customers_path, class: "nav-link fas fa-user" %>
+</li>
+<li class="nav-item">
+  <%= link_to "商品一覧", items_path, class: "nav-link fas fa-user-plus" %>
+</li>
+<li class="nav-item">
+  <%= link_to "カート一覧", cart_items_path, class: "nav-link fas fa-shopping-cart" %>
+</li>
+<li class="nav-item">
+  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt" %>
+</li>
+
+<div id="nav-search">
+  <%= form_tag root_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "検索", :name => nil %>
+    </p>
+<% end %>
+</div>
+</ul>

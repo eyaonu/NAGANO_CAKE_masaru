@@ -1,32 +1,32 @@
-<h2 class="pb-2 mb-4"><%= @item.name %></h2>
-
-<div class="row">
-  <div class="col-6">
-    <%= attachment_image_tag @item, :image, format: 'jpeg', fallback: "ithigo.jpg", style: "max-width: 100%"%>
+<!--商詳細画面(admin)-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-5">
+      <h4 class="text-dark text-center title_bar">商品詳細</h4>
+    </div>
+    <div class="col-md-2 mt-5"></div>
+    <div class="col-md-5 mt-5"></div>
   </div>
-  <div class="col-6">
-    <table class="table">
-    <tr>
-        <th>商品名</th>
-        <td><%= @item.name%></td>
-    </tr>
-    <tr>
-        <th>紹介文</th>
-        <td><%= @item.description %></td>
-    </tr>
-    <tr>
-        <th>単価</th>
-        <td><%= @item.non_taxed_price %></td>
-    </tr>
-    <tr>
-        <th>商品種別</th>
-        <td><%= @item.genre.name %></td>
-    </tr>
-    <tr>
-        <th>販売ステータス</th>
-        <td><%= @item.sales_status_i18n %></td>
-    </tr>
-    </table>
-    <%= link_to "この商品を編集する", edit_admin_item_path(@item), class: "btn btn-info"%>
+
+  <div class="row">
+
+    <div class="col-md-3 mx-auto">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size: "300x200" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "300x200" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-7 mx-auto inline">
+      <table class="table table-borderless">
+        <tr><td>商品名</td><td><%= @item.name %></td></tr>
+        <tr><td>商品説明</td><td><%= @item.introduction %></td></tr>
+        <!--<tr><td>ジャンル</td></td><td>########</td></tr>-->
+        <tr><td>税込価格<br>(税抜価格)</td><td><%= (@item.non_taxed_price) %>(<%= @item.non_taxed_price.to_s(:delimited) %>)円</td></tr>
+      </table>
+      <%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-success w-25" %>
+    </div>
+
   </div>
 </div>

@@ -1,63 +1,63 @@
 class Public::OrdersController < ApplicationController
-  before_action :cart_item_any?, only: [:new, :verification]
+  before_action :cart_item_any?, only: [:new, :confirm]
 
   def new
     @addresses = Address.all
     @ordered = Order.all
   end
 
-  def verification
-    @cart_items = current_end_user.cart_items
+  def confirm
+    @cart_items = current_customer.cart_items
     @total = 0
     @cart_items.each do |cart_item| 
       tal = cart_item.item.non_taxed_price * cart_item.amount
       @total += tal
     end
-    if session[:user]["payment_method"] == "credit"
+#    if session[:customer]["payment_method"] == "credit_card"
       @payment_method = "クレジット払い"
-    elsif session[:user]["payment_method"] == "bunk"
-      @payment_method = "現金払い"
-    end
+#    elsif session[:customer]["payment_method"] == "bunk"
+#      @payment_method = "現金払い"
+    
   end
 
   def create
-    session[:user] = Order.new()
+#    session:customer = Order.new()
 
     #支払い方法のセッション情報
     if params[:payment_select] == "0"
-      session[:user][:payment_method] = 0
+      session[:customer][:payment_method] = 0
     elsif params[:payment_select] == "1"
-      session[:user][:payment_method] = 1
+      session[:customer][:payment_method] = 1
     end
     
     #配送先登録のセッション情報
     if params[:address_select] == "0"
-      session[:user][:postal_code] = current_end_user.postal_code
-      session[:user][:shipping_address] = current_end_user.address
-      session[:user][:direction] = current_end_user.full_name
+      session[:customer][:postal_code] = current_customer.postal_code
+      session[:customer][:shipping_address] = current_customer.address
+      session[:customer][:direction] = current_customer.full_name
     elsif params[:address_select] == "1"
-      session[:user][:postal_code] =  Address.find(params[:address_id]).postal_code
-      session[:user][:shipping_address] = Address.find(params[:address_id]).address
-      session[:user][:direction] = Address.find(params[:address_id]).direction
+      session[:customer][:postal_code] =  Address.find(params[:address_id]).postal_code
+      session[:customer][:shipping_address] = Address.find(params[:address_id]).address
+      session[:customer][:direction] = Address.find(params[:address_id]).direction
     else 
-      session[:user][:postal_code] =  params[:postal_code]
-      session[:user][:shipping_address] = params[:shipping_address]
-      session[:user][:direction] = params[:direction]
+      session[:customer][:postal_code] =  params[:postal_code]
+      session[:customer][:shipping_address] = params[:shipping_address]
+      session[:customer][:direction] = params[:direction]
     end
-    redirect_to orders_verification_path
+    redirect_to orders_complete_path
     
   end
 
   def complete
-    order = Order.new(session[:user])
+    order = Order.new(session[:customer])
     order.postage = 500
     order.payment = 1000
     order.status = 1
-    order.end_user_id = current_end_user.id
+    order.customer_id = current_customer.id
     order.save
-    cart_items = current_end_user.cart_items
+    cart_items = current_customer.cart_items
     cart_items.each do |cart_item|
-      ordered_item = OrderedItem.new
+      ordered_item = OrderDetail.new
       ordered_item.item_id = cart_item.item.id
       ordered_item.production_status = 0
       ordered_item.unit_price = cart_item.item.non_taxed_price
@@ -69,7 +69,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_end_user.ordered_items
+    @orders = current_customer.orders
   end
 
   def show
@@ -86,8 +86,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def cart_item_any?
-    if current_end_user.cart_items.empty?
-      redirect_to end_users_path
+    if current_customer.cart_items.empty?
+      redirect_to customers_path
     end
   end
 end

@@ -9,7 +9,7 @@
     住所 : <%= f.text_field :address %>
   </div>
   <div class="form-group has-icon"><br>
-    宛名 : <%= f.text_field :direction %>
+    宛名 : <%= f.text_field :address %>
   </div>
            
   <%= f.submit "配送先を登録する", class:"btn btn-primary btn-block btn-base-1 mt-20" %>
@@ -29,7 +29,7 @@
       <tr>
         <td><%= address.postal_code %></td>
         <td><%= address.address %></td>
-        <td><%= address.direction %></td>
+        <td><%= address.name %></td>
         <td><%= link_to "編集する", edit_address_path(address) %>
           <%= link_to "削除する", address_path(address), method: :delete, confirm: "本当に削除しますか" %></td>
       </th>

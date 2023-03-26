@@ -8,10 +8,21 @@ class Customer < ApplicationRecord
   has_many :orders
   has_many :ordered_items, through: :orders
 
-  def full_name
-    first_name + last_name
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
+  validates :postal_code, presence: true
+  validates :telephone_number, presence: true
+  validates :address, presence: true
+  validates :email, presence: true
+
+  def address_display
+  '〒' + postal_code + ' ' + address
   end
 
-
+  def fullname_display
+    first_name + last_name
+  end
 
 end

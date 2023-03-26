@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  root "public/items#top"
-
 # 顧客用
   devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -15,19 +13,20 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 scope module: :public do
-    get 'items/top'
-    resources :items, only: [:show]
+    root to: 'homes#top'
+    get '/about' =>'homes#about'
+    resources :items, only: [:show, :index]
     resources :addresses, only: [:index, :create, :update, :destroy, :edit]
     resources :cart_items, only: [:index, :update, :create, :destroy] do
       collection do
         delete 'destroy_all'
       end
     end
-    get 'orders/verification'
+    post 'orders/confirm'
     get 'orders/complete'
-    get '/end_users', to: 'end_users#show', as: 'end_users'
-    get 'end_users/delete_verification'
-    resources :end_users, only: [:edit, :update, :destroy]
+    get '/customers/my_page', to: 'customers#show', as: 'customers'
+    get 'customers/delete_verification'
+    resources :customers, only: [:edit, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
   end
 
@@ -38,6 +37,5 @@ scope module: :public do
     resources :ordered_items, only: [:update]
   end
 
-  resources :end_users, only: [:index, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

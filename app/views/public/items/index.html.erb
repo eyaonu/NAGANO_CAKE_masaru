@@ -1,0 +1,31 @@
+<!--商品一覧画面(public)-->
+<div class="container">
+
+  <div class="row mt-5">
+    <h2>商品一覧</h2>
+  </div>
+
+  <div class="row mt-1">
+
+    <% @items.each do |item| %>
+      <div class="col-md-3 mt-3 mb-5">
+        <div>
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.image, size: "220x150" %>
+          <% end %>
+        </div>
+        <div>
+          <%= item.name %>
+        </div>
+        <div>
+          ￥<%= item.non_taxed_price.to_s(:delimited) %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="row">
+    <div class="col-md-2 mx-auto">
+    </div>
+  </div>
+</div>

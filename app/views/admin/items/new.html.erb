@@ -1,35 +1,52 @@
-<h1>商品登録</h1>
-<div class="row">
-<div class="col-xs-9">
-<%= form_for @item, :url => {:action => :create} do |f| %>
-    
-    <div class="form-group has-icon">
-      <%= f.label :name, "商品名" %>
-      <%= f.text_field :name, class:"form-control" %>
+<!--商品新規登録画面(admin)-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-5">
+      <h4 class="text-dark text-center title_bar">商品新規登録</h4>
     </div>
-    <div class="form-group has-icon">
-      <%= f.label :name, "商品説明" %>
-      <%= f.text_area :description, class:"form-control" %>
-    </div>
-    <div class="form-group has-icon">
-      <%= f.label :image, "商品画像" %><br />
-      <%= f.attachment_field :image %>
-    </div>
-    <div class="form-group has-icon">
-      <%= f.label :genre_id, "商品種別" %><br />
-      <%= f.select :genre_id, [["ケーキ", "1"], ["ジュース", "2"]], include_blank: "選択して下さい" %>
-    </div>
-    <div class="form-group has-icon">
-      <%= f.label :non_taxed_price, "値段(税抜き)" %>
-      <%= f.text_field :non_taxed_price, class:"form-control" %>
-    </div>
-    <div class="form-group has-icon">
-      <%= f.radio_button :sales_status, :on_sale, checked: "checked"%>
-       <%= f.label :sales_status, "有効", {value: :"0", style: "display: inline-block;"} %>
-       <%= f.radio_button :sales_status, :off_sale %>
-       <%= f.label :sales_status, "無効", {value: :"1", style: "display: inline-block;"} %>
-    </div>
-    <%= f.submit "この内容で登録する", class:"btn btn-primary btn-block btn-base-1 mt-20" %>
-  <% end %>
+    <div class="col-md-2 mt-5"></div>
+    <div class="col-md-5 mt-5"></div>
   </div>
+
+  <!--バリデーション-->
+
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+      <%= form_with model: [:admin ,@item] do |f| %>
+        <div class="form-group row">
+          <label for="inputImage", class="col-sm-4 col-form-label">商品画像</label>
+          <%= f.file_field :image, placeholder: "ファイルを選択", accept: "image/*", class:"col form-control-file item_image"%>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputName", class="col-sm-4 col-form-label">商品名</label>
+          <%= f.text_field :name, placeholder: "商品名", id:"inputName", class:"col form-control item_name" %>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputIntroduction", class="col-sm-4 col-form-label">商品説明</label>
+          <%= f.text_area :introduction, placeholder: "ここに説明文を記述します",size: "5x5", id:"inputIntroduction", class:"col form-control introduction"  %>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputGenre", class="col-sm-4 col-form-label">ジャンルの選択</label>
+          <%= f.collection_select :genre_id, Genre.all, :id, :name, class:"col form-control price" %>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputPrice", class="col-sm-4 col-form-label">税抜価格</label>
+          <%= f.number_field :non_taxed_price, placeholder: "1000", id:"inputPrice", class:"col form-control price" %><p>円</p>
+        </div>
+
+        <!--販売ステータス選択機能-->
+
+        <div class="form-group row">
+          <label for="inputPassward", class="col-sm-4 col-form-label"></label>
+          <%= f.submit "新規登録", class:"btn btn-success w-25 mx-auto" %>
+        </div>
+
+      <% end %>
+    </div>
   </div>
+</div>
