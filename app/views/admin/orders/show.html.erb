@@ -9,7 +9,7 @@
 
   <div class="row mt-3">
     <div class="col-md-8 offset-md-1">
-      <table class="table table-borderless">
+      <table class="table table-bordered">
         <tr>
           <td class="font-weight-bold">購入者</td>
           <td>
@@ -42,9 +42,9 @@
   </div>
 
   <div class="row">
-    <!--注文商品表(製造ステータス更新付き)-->
+    <!--注文商品表(製作ステータス更新付き)-->
     <div class="col-md-8 offset-md-1">
-      <table class="table">
+      <table class="table table-bordered">
         <thead>
             <tr>
               <th>商品名</th>
@@ -85,7 +85,7 @@
       </table>
     </div>
     <div class="col">
-      <table class="table table-borderless">
+      <table class="table table-bordered">
         <tr><td class="font-weight-bold">商品合計</td><td><%= sum.to_s(:delimited) %>円</td></tr>
         <tr><td class="font-weight-bold">送料</td><td><%= @order.postage %>円</td></tr>
         <tr><td class="font-weight-bold">請求金額合計</td><td class="font-weight-bold"><%= (@order.payment).to_s(:delimited) %>円</td></tr>
