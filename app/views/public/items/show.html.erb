@@ -1,4 +1,3 @@
-
 <h2 class="pb-2 mb-4"><%= @item.name %></h2>
 
 <div class="row">
@@ -11,7 +10,7 @@
       <%= @item.introduction %>
     </div>
     <% if current_customer %>
-  <% if @duplication == 0 %>
+
     <%= form_for @cart_item do |f| %>
       <div class="form-group has-icon">
         <%= f.label :個数 %>
@@ -22,9 +21,6 @@
 
       <%= f.submit "カートに追加する", class:"btn btn-primary btn-block btn-base-1" %>
     <% end %>
-  <% else %>
-    <div>カートに追加済み</div>
-  <% end %>
 <% end %>
 
   </div>

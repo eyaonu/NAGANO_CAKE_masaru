@@ -13,7 +13,7 @@
         <tr>
           <td class="font-weight-bold">購入者</td>
           <td>
-            <%= link_to "#{@order.customer.last_name + ' ' + @order.customer.first_name}", admin_customer_path(@order.customer_id) %>
+            <%= link_to @order.customer.last_name, admin_customer_path(@order.customer) %>
           </td>
         </tr>
 
@@ -27,8 +27,9 @@
         <tr>
           <td class="font-weight-bold">配送先</td>
           <td>
-            <%= '〒' + @order.postal_code + ' ' + @order.address %><br>
-            <%= @order.name %>
+            <%= '〒' + @order.postal_code + ' ' %><br>
+            <%= @order.shipping_address %>
+            <%= @order.direction %>
           </td>
         </tr>
 
@@ -85,9 +86,9 @@
     </div>
     <div class="col">
       <table class="table table-borderless">
-        <tr><td class="font-weight-bold">商品合計</td><td><%= sum.to_s(:delimited) + '円' %></td></tr>
-        <tr><td class="font-weight-bold">送料</td><td><%= @order.shipping_cost.to_s(:delimited) + '円' %></td></tr>
-        <tr><td class="font-weight-bold">請求金額合計</td><td class="font-weight-bold"><%= (@order.amount_paid).to_s(:delimited) + '円' %></td></tr>
+        <tr><td class="font-weight-bold">商品合計</td><td><%= sum.to_s(:delimited) %>円</td></tr>
+        <tr><td class="font-weight-bold">送料</td><td><%= @order.postage %>円</td></tr>
+        <tr><td class="font-weight-bold">請求金額合計</td><td class="font-weight-bold"><%= (@order.payment).to_s(:delimited) %>円</td></tr>
       </table>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <!--商品一覧画面(public)-->
 <div class="container">
 
-  <div class="row mt-5">
+  <div class="row mt-2">
     <h2>商品一覧</h2>
   </div>
 
   <div class="row mt-1">
 
     <% @items.each do |item| %>
-      <div class="col-md-3 mt-3 mb-5">
+      <div class="col-auto mt-3 mb-5">
         <div>
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.image, size: "220x150" %>
@@ -22,6 +22,8 @@
         </div>
       </div>
     <% end %>
+
+      <h1 class="m-sm-0" style="text-height:5%; position-fixed-bottom; bottom:5%; right: 10%; color:#444; font-italic;">大切な方への贈り物や、日々頑張っている自分自身へのささやかなご褒美に。</h1>
 
   </div>
   <div class="row">

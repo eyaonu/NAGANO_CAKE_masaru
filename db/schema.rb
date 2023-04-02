@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(version: 2023_03_25_112842) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
-    t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -111,10 +110,9 @@ ActiveRecord::Schema.define(version: 2023_03_25_112842) do
   create_table "items", force: :cascade do |t|
     t.integer "genre_id"
     t.string "name"
-    t.string "image_id"
     t.text "introduction"
     t.integer "non_taxed_price"
-    t.integer "sales_status"
+    t.boolean "sales_status", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -27,10 +27,6 @@ class Public::CustomersController < ApplicationController
 
   end
 
-  def unsubscribe
-    @customer=current_customer
-  end
-
   def withdraw
     @customer = current_customer
 
@@ -39,7 +35,15 @@ class Public::CustomersController < ApplicationController
 
     # ログアウトさせる
     reset_session
-    redirect_to root_path
+    redirect_to root_path 
+  end
+
+  def unsubscribe
+    @customer = current_customer
+  end
+
+  def delete_verification
+
   end
 
   private

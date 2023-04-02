@@ -18,10 +18,10 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_item = @order.order_items
+    @order_items = @order.order_details
     #商品合計
     @total = 0
-    @order_item.each do |order_item|
+    @order_items.each do |order_item|
       tol = order_item.item.non_taxed_price * order_item.quantity
       @total += tol 
     end

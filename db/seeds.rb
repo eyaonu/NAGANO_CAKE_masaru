@@ -1,20 +1,28 @@
-Admin.create!(
-  email: "aa@aa",
-  password: "000000"
+#Admin.create!(
+  #email: "aa@aa",
+  #password: "000000"
+  #)
+  
+  Genre.create!(
+    [
+      {
+        name: "ケーキ各種"
+      },
+      {
+        name: "焼き菓子(クッキー等)"
+      },
+      {
+        name: "洋菓子(シュークリーム等)"
+      },
+      {
+        name: "生洋菓子(プリン等)"
+      },
+      {
+        name: "贈答品・ギフト向け"
+      }
+    ]
   )
 
-# Genre.create!(
-#   [
-#     {
-#       name: "ケーキ",
-#       status: true,
-#     },
-#     {
-#       name: "ジュース",
-#       status: true
-#     }
-#   ]
-# )
 # Item.create!(
 #   [
 #     {

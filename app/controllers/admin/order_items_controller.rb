@@ -18,9 +18,10 @@ class Admin::OrderItemsController < ApplicationController
     status = 1
   end
 end
-        if status == 0
-          order.update(status: "d")
-        end
-        redirect_to admin_orders_path
+
+if status == 0
+    order.update(status: "d")
+end
+  redirect_to admin_orders_path
   end
 end

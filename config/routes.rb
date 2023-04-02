@@ -25,16 +25,18 @@ scope module: :public do
     post 'orders/confirm'
     get 'orders/complete'
     get '/customers/my_page', to: 'customers#show', as: 'customers'
-    get 'customers/delete_verification'
+    patch 'customers/withdraw'
+    get 'customers/unsubscribe'
     resources :customers, only: [:edit, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
   end
 
   namespace :admin do
+    get '/' => 'homes#top'
     resources :orders, only: [:index, :update, :show]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    resources :end_users, only: [:index, :show, :edit, :update]
-    resources :ordered_items, only: [:update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :order_items, only: [:update]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

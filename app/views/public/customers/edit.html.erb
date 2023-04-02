@@ -12,14 +12,49 @@
   <h2>Customer info</h2>
   <%= form_for(@customer) do |f| %>
 
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name_kana %><br />
+    <%= f.text_field :last_name_kana %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name_kana %><br />
+    <%= f.text_field :first_name_kana %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telephone_number %><br />
+    <%= f.text_field :telephone_number %>
+  </div>
+
     <div class="form-group has-icon">
       <%= f.label :email, "email",  class: 'control-label'%>
       <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail" %>
       <span class="fa fa-customer form-control-icon" aria-hidden="true"></span>
     </div>
     
-    <%= f.submit "update customer", class:"btn btn-default" %>
+    <%= f.submit "会員情報を更新", class:"btn btn-success" %>
   <% end %>
 </div>
 
-<%= link_to "退会する", customers_delete_verification_path %>
+<%= link_to "退会の手続き", customers_unsubscribe_path , class: 'btn btn-danger' %>
