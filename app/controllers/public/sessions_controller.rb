@@ -27,8 +27,8 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   # ログインした遷移先
-  def after_sign_in_path_for(resource)
-     root_path
+  def after_sign_in_path_for(resource_or_scope)
+      root_path # ログイン後に遷移するpathを設定
   end
 
   # ログアウトした遷移先

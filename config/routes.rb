@@ -25,9 +25,10 @@ scope module: :public do
     post 'orders/confirm'
     get 'orders/complete'
     get '/customers/my_page', to: 'customers#show', as: 'customers'
+    get '/customers/my_page/edit', to: 'customers#edit', as: 'edit_customer'
     patch 'customers/withdraw'
     get 'customers/unsubscribe'
-    resources :customers, only: [:edit, :update, :destroy]
+    resources :customers, only: [:update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
   end
 

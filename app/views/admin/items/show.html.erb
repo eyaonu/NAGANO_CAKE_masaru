@@ -22,7 +22,8 @@
       <tr><td>商品名</td><td><%= @item.name %></td></tr>
       <tr><td>商品説明</td><td><%= @item.introduction %></td></tr>
       <tr><td>ジャンル</td></td><td><%= @item.genre.name %></td></tr>
-      <tr><td>税込価格<br>(税抜価格)</td><td><%= (@item.non_taxed_price) %>(<%= @item.non_taxed_price.to_s(:delimited) %>)円</td></tr>
+      <tr><td>税込価格<br>(税抜価格)</td><td>￥<%= (@item.with_tax_price) %>円 <br>￥(<%= @item.non_taxed_price.to_s(:delimited) %>)円</td></tr>
+
     </table>
     <%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-success w-25" %>
   </div>
